@@ -5,7 +5,7 @@ data class SyncRequest(
 )
 
 class SyncRequestBuilder {
-    lateinit var conversationId: ConversationId
+    var conversationId: ConversationId = ConversationId.from("")
     var retryCount: Int = 0
     var requiresNetwork: Boolean = false
 
