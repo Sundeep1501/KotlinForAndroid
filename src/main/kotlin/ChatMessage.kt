@@ -78,3 +78,13 @@ fun transformMessages(
     shouldTransform: (ChatMessage) -> Boolean,
     transformation: (ChatMessage) -> ChatMessage,
 ): List<ChatMessage> = messages.map { if (shouldTransform(it)) transformation(it) else it }
+
+fun belongsTo(
+    conversationId: ConversationId,
+): (ChatMessage) -> Boolean = { message -> belongsToConversation(message, conversationId) }
+
+
+fun messagesForConversation(
+    messages: List<ChatMessage>,
+    conversationId: ConversationId,
+): List<ChatMessage> = messages.filter(belongsTo(conversationId))
