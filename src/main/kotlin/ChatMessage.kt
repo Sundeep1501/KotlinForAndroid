@@ -72,3 +72,9 @@ fun belongsToConversation(
     message: ChatMessage,
     conversationId: ConversationId,
 ): Boolean = message.conversationId == conversationId
+
+fun transformMessages(
+    messages: List<ChatMessage>,
+    shouldTransform: (ChatMessage) -> Boolean,
+    transformation: (ChatMessage) -> ChatMessage,
+): List<ChatMessage> = messages.map { if (shouldTransform(it)) transformation(it) else it }
