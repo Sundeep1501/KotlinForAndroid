@@ -6,10 +6,10 @@ data class MessageLog(
 
 fun createMessageLog(
     message: ChatMessage?,
-): MessageLog? = message?.let {
+): MessageLog? = message?.run {
     MessageLog(
-        messageId = it.id.value,
-        conversationId = it.conversationId.value,
-        statusText = it.deliveryStatus.toDisplayText()
+        messageId = id.value,
+        conversationId = conversationId.value,
+        statusText = deliveryStatus.toDisplayText()
     )
 }
