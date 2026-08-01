@@ -8,11 +8,9 @@ fun firstThreeFailedMessageIds(
         .take(3)
         .toList()
 
-
-fun indexMessagesById(
-    messages: List<ChatMessage>,
-): Map<MessageId, ChatMessage> {
-    val messagesById = messages.associateBy { message -> message.id }
-    require(messagesById.size == messages.size) { "Duplicate message IDs" }
-    return messagesById
+fun <T, K> indexBy(
+    items: List<T>,
+    keySelector: (T) -> K,
+): Map<K, T> = items.associateBy(keySelector).also { map ->
+    require(items.size == map.size) { "Duplicate keys" }
 }
