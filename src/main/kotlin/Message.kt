@@ -13,9 +13,11 @@ data class SenderSummary(
 fun summarizeBySender(
     messages: List<Message>,
 ): List<SenderSummary> {
-    return messages.groupBy { it.senderName.lowercase() }.map { (key, messages) ->
+    return messages.groupBy { it.senderName.lowercase() }.map { (senderName, senderMessages) ->
         SenderSummary(
-            senderName = key, messageCount = messages.size, latestMessageMillis = messages.maxOf { it.sentAtMillis })
+            senderName = senderName,
+            messageCount = senderMessages.size,
+            latestMessageMillis = senderMessages.maxOf { it.sentAtMillis })
     }.sortedWith(
         compareByDescending<SenderSummary> { it.messageCount }.thenBy { it.senderName }
     )
