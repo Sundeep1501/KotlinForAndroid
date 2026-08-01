@@ -34,3 +34,8 @@ fun updateDeliveryStatus(
         it.copy(deliveryStatus = newStatus)
     } else it
 }
+
+fun findMessageStatusText(
+    messages: List<ChatMessage>,
+    messageId: String,
+): String = messages.firstOrNull { it.id == messageId }?.deliveryStatus?.toDisplayText() ?: "Message not found"
