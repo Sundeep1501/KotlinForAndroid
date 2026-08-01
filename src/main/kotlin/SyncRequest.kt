@@ -24,3 +24,8 @@ fun createSyncRequest(
     this.retryCount = 3
     this.requiresNetwork = true
 }.build()
+
+fun createAndLogSyncRequest(
+    conversationId: ConversationId,
+    logRequest: (SyncRequest) -> Unit,
+): SyncRequest = createSyncRequest(conversationId).also(logRequest)
