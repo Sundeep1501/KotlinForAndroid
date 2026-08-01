@@ -42,16 +42,29 @@ fun findMessageStatusText(
 ): String = messages.firstOrNull { it.id == messageId }?.deliveryStatus?.toDisplayText() ?: "Message not found"
 
 @JvmInline
-value class MessageId(val value: String) {
+value class MessageId private constructor(val value: String) {
+
     init {
-        require(value.isNotBlank()) { "Message ID cannot be blank" }
+        require(value.isNotBlank()) {
+            "Message ID cannot be blank"
+        }
+    }
+
+    companion object {
+        fun from(rawValue: String): MessageId = MessageId(rawValue.trim())
     }
 }
 
 @JvmInline
-value class ConversationId(val value: String) {
+value class ConversationId private constructor(val value: String) {
     init {
-        require(value.isNotBlank()) { "Conversation ID cannot be blank" }
+        require(value.isNotBlank()) {
+            "Conversation ID cannot be blank"
+        }
+    }
+
+    companion object {
+        fun from(rawValue: String): ConversationId = ConversationId(rawValue.trim())
     }
 }
 
